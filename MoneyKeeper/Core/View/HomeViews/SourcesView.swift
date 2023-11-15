@@ -8,11 +8,83 @@
 import SwiftUI
 
 struct SourcesView: View {
+    @State var showingSourceEditing:Bool = false
+    var sources :[Source]
+    var delete: (_ source:Source)->Void
+    var addSource:()->Void
+    var save: ()->Void
+    init(sources: [Source], delete: @escaping (_ source:Source) -> Void, addSource: @escaping ()->Void, save: @escaping ()->Void) {
+        self.sources = sources
+        self.delete = delete
+        self.addSource = addSource
+        self.save = save
+    }
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Section("Sources"){
+            ForEach(sources){ source in
+
+                HStack{
+                    Image(systemName: source.getIcon())
+                    Text(source.getName())
+                    Spacer()
+                    Text(String(format: "%.2f", source.getBalance()))
+                    Text(" lei")
+                }
+
+                .swipeActions{
+                    Button(role: .destructive) {
+                        withAnimation {
+                            delete(source)
+                        }
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
+                .contextMenu{
+                    Button{
+                        showingSourceEditing.toggle()
+                    }label: {
+                        HStack{
+                            Text("Edit your sources")
+                            Image(systemName: "pencil.circle")
+                        }
+                    }
+                    .foregroundStyle(.green)
+
+                    Button(role: .destructive) {
+                        withAnimation {
+                            delete(source)
+                        }
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
+                .sheet(isPresented: $showingSourceEditing, content: {
+                    EditView(editingSource: source, 
+                             toggle: {showingSourceEditing.toggle()
+                        save()
+                    })
+                        .presentationDetents([.medium])
+                })
+            }
+
+            Button{
+                addSource()
+            }label: {
+                HStack{
+                    Text("Add new source")
+                    Image(systemName: "plus.circle")
+                }
+            }
+            .foregroundStyle(.green)
+
+
+
+        }
+
     }
 }
 
-#Preview {
-    SourcesView()
-}
+//#Preview {
+//    SourcesView(sources: [], delete: {}, editSource: {})
+//}

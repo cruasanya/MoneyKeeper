@@ -8,16 +8,39 @@
 import SwiftUI
 
 struct HeaderView: View {
+    @EnvironmentObject var user:User
     var body: some View {
         ZStack{
-            Rectangle()
-                .ignoresSafeArea()
-                .foregroundStyle(Color("header"))
-                .frame(width: 600, height: 300)
+
+            VStack(alignment:.leading){
+                HStack{
+                    Text(user.getInitials())
+                        .font(.title3)
+                        .frame(width: 40,height: 40)
+                        .background(Color(.orange))
+                        .clipShape(Circle())
+                        .fontDesign(.rounded)
+                        .foregroundStyle(Color("text"))
+                    HStack{
+                        Text("Balance:")
+                        Text("\(user.getBalance()) lei")
+                    }
+                    .padding(.horizontal)
+                    .font(.title3)
+                    Spacer()
+
+                }.padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 20.0)
+                            .foregroundStyle(.green)
+                    )
+
+            }
         }
     }
 }
 
 #Preview {
     HeaderView()
+        .environmentObject(User(name: "Alexandr", surname: "Novicov"))
 }

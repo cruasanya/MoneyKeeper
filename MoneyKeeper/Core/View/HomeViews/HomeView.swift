@@ -10,67 +10,17 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var user:User
     @State var showingSourceAdding:Bool = false
-    @State var showingSourceEditing:Bool = false
     @State var showingCategoryAdding:Bool = false
     @State var showingAddHistory:Bool = false
     var body: some View {
         ZStack{
             Color("background")
             List{
-                Section("Sources"){
-                    ForEach(user.getSources()){ source in
-
-                        HStack{
-                            Image(systemName: source.getIcon())
-                            Text(source.getName())
-                            Spacer()
-                            Text(String(format: "%.2f", source.getBalance()))
-                            Text(" lei")
-                        }
-
-                        .swipeActions{
-                            Button(role: .destructive) {
-                                withAnimation {
-                                    user.deleteSource(source: source)
-                                }
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
-                        }
-                        .contextMenu{
-                            Button{
-                                showingSourceEditing.toggle()
-                            }label: {
-                                HStack{
-                                    Text("Edit your sources")
-                                    Image(systemName: "pencil.circle")
-                                }
-                            }
-                            .foregroundStyle(.green)
-
-                            Button(role: .destructive) {
-                                withAnimation {
-                                    user.deleteSource(source: source)
-                                }
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
-                        }
-                    }
-
-                    Button{
-                        showingSourceAdding.toggle()
-                    }label: {
-                        HStack{
-                            Text("Add new source")
-                            Image(systemName: "plus.circle")
-                        }
-                    }
-                    .foregroundStyle(.green)
-
-
-
-                }
+                SourcesView(sources: user.getSources(),
+                            delete: user.deleteSource(source:),
+                            addSource: {self.showingSourceAdding.toggle()}, 
+                            save: {user.calculateBalance()
+                                    user.fetch()})
                 Section("Spending Category"){
                     ForEach(user.getCategories()){ category in
                         HStack{
@@ -99,7 +49,7 @@ struct HomeView: View {
                             Image(systemName: "plus.circle")
                         }
                     }
-                    .buttonStyle(.plain)
+                    .foregroundStyle(.green)
                 }
                 Section("History"){
                     Button(action: {
@@ -111,7 +61,7 @@ struct HomeView: View {
                             Image(systemName: "plus.circle")
                         }
                     })
-                    .buttonStyle(.plain)
+                    .foregroundStyle(.green)
                     ForEach(user.getTranasaction()){ transaction in
                         VStack(alignment:.leading){
                             HStack{
@@ -155,10 +105,6 @@ struct HomeView: View {
         .sheet(isPresented: $showingAddHistory, content: {
             AddHistoryView(add: {showingAddHistory.toggle()})
                 .environmentObject(user)
-                .presentationDetents([.medium])
-        })
-        .sheet(isPresented: $showingSourceEditing, content: {
-            EditView(editingSources: user.getSources())
                 .presentationDetents([.medium])
         })
     }
