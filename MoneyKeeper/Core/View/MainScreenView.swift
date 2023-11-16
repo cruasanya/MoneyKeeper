@@ -21,8 +21,7 @@ struct MainScreenView: View {
                 HomeView()
                     .environmentObject(user)
             case 1:
-                Text("Statistic")
-                Spacer()
+                StatisticView(history: user.getTransactionHistory())
             case 2:
                 Text("User")
                 Spacer()

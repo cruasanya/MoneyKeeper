@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SourcesView: View {
     @State var showingSourceEditing:Bool = false
+    @State var editingSource:Source = Source(name: "", balance: 0, iconName: "plus")
+
     var sources :[Source]
     var delete: (_ source:Source)->Void
     var addSource:()->Void
@@ -30,7 +32,29 @@ struct SourcesView: View {
                     Text(String(format: "%.2f", source.getBalance()))
                     Text(" lei")
                 }
-
+                .onTapGesture {
+                    print(index)
+                }
+                .contextMenu{
+                    Button{
+                        self.editingSource = source
+                        showingSourceEditing.toggle()
+                    }label: {
+                        HStack{
+                            Text("Edit your sources")
+                            Image(systemName: "pencil.circle")
+                        }
+                    }
+                    .foregroundStyle(.green)
+                    
+                    Button(role: .destructive) {
+                        withAnimation {
+                            delete(source)
+                        }
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                }
                 .swipeActions{
                     Button(role: .destructive) {
                         withAnimation {
@@ -40,32 +64,15 @@ struct SourcesView: View {
                         Label("Delete", systemImage: "trash")
                     }
                 }
-                .contextMenu{
-                    Button{
-                        showingSourceEditing.toggle()
-                    }label: {
-                        HStack{
-                            Text("Edit your sources")
-                            Image(systemName: "pencil.circle")
-                        }
-                    }
-                    .foregroundStyle(.green)
-
-                    Button(role: .destructive) {
-                        withAnimation {
-                            delete(source)
-                        }
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                    }
-                }
                 .sheet(isPresented: $showingSourceEditing, content: {
-                    EditView(editingSource: source, 
-                             toggle: {showingSourceEditing.toggle()
-                        save()
-                    })
+                    EditView(editingSource: $editingSource,
+                             toggle: {
+                                showingSourceEditing.toggle()
+                                save()
+                            })
                         .presentationDetents([.medium])
                 })
+
             }
 
             Button{
@@ -81,6 +88,7 @@ struct SourcesView: View {
 
 
         }
+
 
     }
 }

@@ -9,8 +9,9 @@ import SwiftUI
 
 struct EditView: View {
     @State var editingText:String = ""
-    var editingSource : Source
+    @Binding var editingSource : Source
     var toggle: ()->Void
+
     var body: some View {
         VStack{
             VStack(alignment:.leading){
@@ -48,5 +49,5 @@ struct EditView: View {
 }
 
 #Preview {
-    EditView(editingSource: Source(name: "Card", balance: 0, iconName: "creditcard"), toggle: {})
+    EditView(editingSource: .constant(Source(name: "Card", balance: 0, iconName: "creditcard")), toggle: {})
 }

@@ -84,6 +84,9 @@ class User:ObservableObject{
     func getCategories()->[Category]{
         return self.categories
     }
+    func getTransactionHistory()->History{
+        return self.history
+    }
     func getTranasaction()->[Transaction]{
         return self.history.getTransactions()
     }

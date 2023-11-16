@@ -19,8 +19,10 @@ struct HomeView: View {
                 SourcesView(sources: user.getSources(),
                             delete: user.deleteSource(source:),
                             addSource: {self.showingSourceAdding.toggle()}, 
-                            save: {user.calculateBalance()
-                                    user.fetch()})
+                            save: {
+                                user.calculateBalance()
+                                user.fetch()
+                            })
                 Section("Spending Category"){
                     ForEach(user.getCategories()){ category in
                         HStack{

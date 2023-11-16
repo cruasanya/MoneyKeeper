@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUICharts
 
 class History : Codable{
     private var  transactions: [Transaction] = []
@@ -22,6 +23,31 @@ class History : Codable{
         if let index = transactions.firstIndex(of: transaction){
             transactions.remove(at: index)
         }
+    }
+
+    func getTransactionData() -> ChartData {
+        var transactionSums: [Double] = []
+
+        for transaction in transactions {
+            if let sum = Double(transaction.getSum()) {
+                transactionSums.append(sum)
+            } else {
+                print("Error converting sum for transaction: \(transaction.getSum())")
+            }
+        }
+
+        return ChartData(points: transactionSums)
+    }
+    func getTransactionSum()-> [Double]{
+        var transactionSums: [Double] = []
+        for transaction in transactions {
+            if let sum = Double(transaction.getSum()) {
+                transactionSums.append(sum)
+            } else {
+                print("Error converting sum for transaction: \(transaction.getSum())")
+            }
+        }
+        return transactionSums
     }
 
 }
