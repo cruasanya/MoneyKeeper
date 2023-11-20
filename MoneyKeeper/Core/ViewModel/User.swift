@@ -87,8 +87,11 @@ class User:ObservableObject{
     func getTransactionHistory()->History{
         return self.history
     }
-    func getTranasaction()->[Transaction]{
+    func getTranasactions()->[Transaction]{
         return self.history.getTransactions()
+    }
+    func getTransactions(from date: Date)->[Transaction]{
+        return self.history.getTransactions(from: date)
     }
     func getPosibleCategoryIcon()->[String]{
         return ["fork.knife","cup.and.saucer","gym.bag","globe.europe.africa","heart.circle"]

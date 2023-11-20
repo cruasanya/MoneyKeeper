@@ -18,6 +18,19 @@ class History : Codable{
     func getTransactions()->[Transaction]{
         return self.transactions
     }
+    func getTransactions(from date: Date) -> [Transaction] {
+        var selectedTransactions: [Transaction] = []
+        let calendar = Calendar.current
+        let selectedDateComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        for transaction in transactions {
+            let transactionDateComponents = calendar.dateComponents([.year, .month, .day], from: transaction.date)
+
+            if selectedDateComponents == transactionDateComponents {
+                selectedTransactions.append(transaction)
+            }
+        }
+        return selectedTransactions
+    }
 
     func deleteTransaction(transaction:Transaction){
         if let index = transactions.firstIndex(of: transaction){

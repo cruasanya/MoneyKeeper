@@ -23,7 +23,10 @@ struct MainScreenView: View {
             case 1:
                 StatisticView(history: user.getTransactionHistory())
             case 2:
-                Text("User")
+                Text("History Search")
+                Spacer()
+            case 3:
+                UserView()
                 Spacer()
             default:
                 Text("to be continue...")
@@ -34,7 +37,9 @@ struct MainScreenView: View {
                 Spacer()
                 TabBarButton(index: 1, iconName: "chart.bar", selectedView: $selectedView)
                 Spacer()
-                TabBarButton(index: 2, iconName: "person.circle", selectedView: $selectedView)
+                TabBarButton(index: 2, iconName: "magnifyingglass.circle", selectedView: $selectedView)
+                Spacer()
+                TabBarButton(index: 3, iconName: "person.circle", selectedView: $selectedView)
                 Spacer()
             }
             .frame(maxHeight: 100)

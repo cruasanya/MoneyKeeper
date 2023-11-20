@@ -27,6 +27,9 @@
 		D26DEE4A2B05F1C500BC2C6B /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = D26DEE492B05F1C500BC2C6B /* SwiftUICharts */; };
 		D26DEE4C2B05F26F00BC2C6B /* StatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26DEE4B2B05F26F00BC2C6B /* StatisticView.swift */; };
 		D26DEE4E2B05F9E000BC2C6B /* BarChartExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26DEE4D2B05F9E000BC2C6B /* BarChartExtension.swift */; };
+		D2FE736D2B0B8D3D00737CFF /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE736C2B0B8D3D00737CFF /* CategoryView.swift */; };
+		D2FE736F2B0BA1CE00737CFF /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FE736E2B0BA1CE00737CFF /* UserView.swift */; };
+		D2FE73712B0BA48200737CFF /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = D2FE73702B0BA48200737CFF /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,8 @@
 		D23FEC6C2B04C1C600F5E6DB /* SourcesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesView.swift; sourceTree = "<group>"; };
 		D26DEE4B2B05F26F00BC2C6B /* StatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticView.swift; sourceTree = "<group>"; };
 		D26DEE4D2B05F9E000BC2C6B /* BarChartExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartExtension.swift; sourceTree = "<group>"; };
+		D2FE736C2B0B8D3D00737CFF /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		D2FE736E2B0BA1CE00737CFF /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D26DEE4A2B05F1C500BC2C6B /* SwiftUICharts in Frameworks */,
+				D2FE73712B0BA48200737CFF /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,13 +140,13 @@
 			children = (
 				D21D69512B0244CE0076E441 /* ContentView.swift */,
 				D21D696B2B0253FE0076E441 /* MainScreenView.swift */,
-				D23FEC652B04AED000F5E6DB /* HomeView.swift */,
-				D26DEE4B2B05F26F00BC2C6B /* StatisticView.swift */,
 				D23FEC6B2B04C1A100F5E6DB /* HomeViews */,
+				D26DEE4B2B05F26F00BC2C6B /* StatisticView.swift */,
 				D21D696F2B0269570076E441 /* AddingSourceCategoryView.swift */,
 				D21D696D2B02593E0076E441 /* HeaderView.swift */,
 				D21D69732B028C340076E441 /* AddHistoryView.swift */,
 				D23FEC672B04B91200F5E6DB /* EditView.swift */,
+				D2FE736E2B0BA1CE00737CFF /* UserView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -157,7 +163,9 @@
 		D23FEC6B2B04C1A100F5E6DB /* HomeViews */ = {
 			isa = PBXGroup;
 			children = (
+				D23FEC652B04AED000F5E6DB /* HomeView.swift */,
 				D23FEC6C2B04C1C600F5E6DB /* SourcesView.swift */,
+				D2FE736C2B0B8D3D00737CFF /* CategoryView.swift */,
 			);
 			path = HomeViews;
 			sourceTree = "<group>";
@@ -180,6 +188,7 @@
 			name = MoneyKeeper;
 			packageProductDependencies = (
 				D26DEE492B05F1C500BC2C6B /* SwiftUICharts */,
+				D2FE73702B0BA48200737CFF /* SwiftUICharts */,
 			);
 			productName = MoneyKeeper;
 			productReference = D21D694C2B0244CE0076E441 /* MoneyKeeper.app */;
@@ -241,11 +250,13 @@
 				D21D69622B02459E0076E441 /* History.swift in Sources */,
 				D26DEE4C2B05F26F00BC2C6B /* StatisticView.swift in Sources */,
 				D21D69772B02BE560076E441 /* FileManagerExtension.swift in Sources */,
+				D2FE736F2B0BA1CE00737CFF /* UserView.swift in Sources */,
 				D23FEC662B04AED000F5E6DB /* HomeView.swift in Sources */,
 				D21D696E2B02593E0076E441 /* HeaderView.swift in Sources */,
 				D23FEC682B04B91200F5E6DB /* EditView.swift in Sources */,
 				D21D69702B0269570076E441 /* AddingSourceCategoryView.swift in Sources */,
 				D21D69522B0244CE0076E441 /* ContentView.swift in Sources */,
+				D2FE736D2B0B8D3D00737CFF /* CategoryView.swift in Sources */,
 				D21D69682B0247560076E441 /* Source.swift in Sources */,
 				D21D69642B0245CF0076E441 /* Transaction.swift in Sources */,
 				D21D69742B028C340076E441 /* AddHistoryView.swift in Sources */,
@@ -474,6 +485,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		D26DEE492B05F1C500BC2C6B /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D26DEE482B05F1C500BC2C6B /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+		D2FE73702B0BA48200737CFF /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D26DEE482B05F1C500BC2C6B /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;

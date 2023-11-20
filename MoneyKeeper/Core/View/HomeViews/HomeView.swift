@@ -23,37 +23,15 @@ struct HomeView: View {
                                 user.calculateBalance()
                                 user.fetch()
                             })
-                Section("Spending Category"){
-                    ForEach(user.getCategories()){ category in
-                        HStack{
-                            Image(systemName: category.getIcon())
-                            Text(category.getName())
-                            Spacer()
-                            Text(String(format: "%.2f", category.getSpending()))
-                            Text(" lei")
-                        }
-                        .swipeActions{
-                            Button(role: .destructive) {
-                                withAnimation {
-                                    user.deleteCategorie(category: category)
-                                }
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
-                        }
-                    }
-                    Button{
-                        showingCategoryAdding.toggle()
-                    }label: {
-                        HStack{
-                            Text("Add new spending category")
-                            Spacer()
-                            Image(systemName: "plus.circle")
-                        }
-                    }
-                    .foregroundStyle(.green)
-                }
-                Section("History"){
+                CategoryView(categories: user.getCategories(),
+                             delete: user.deleteCategorie(category:),
+                             addCategory: {self.showingCategoryAdding.toggle()}, 
+                             addSpending: {showingAddHistory.toggle()},
+                             save: {
+                                user.calculateBalance()
+                                user.fetch()
+                            })
+                Section("Today's History"){
                     Button(action: {
                         showingAddHistory.toggle()
                     }, label: {
@@ -64,7 +42,7 @@ struct HomeView: View {
                         }
                     })
                     .foregroundStyle(.green)
-                    ForEach(user.getTranasaction()){ transaction in
+                    ForEach(user.getTransactions(from: .now)){ transaction in
                         VStack(alignment:.leading){
                             HStack{
                                 Text(transaction.getSource())

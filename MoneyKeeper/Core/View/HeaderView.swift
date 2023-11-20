@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HeaderView: View {
     @EnvironmentObject var user:User
+    @State var extend:Bool = true
     var body: some View {
         ZStack{
 
@@ -16,7 +17,7 @@ struct HeaderView: View {
                 HStack{
                     Text(user.getInitials())
                         .font(.title3)
-                        .frame(width: 40,height: 40)
+                        .frame(width: extend ? 40 : 60 ,height: extend ? 40 : 60)
                         .background(Color(.orange))
                         .clipShape(Circle())
                         .fontDesign(.rounded)
@@ -26,16 +27,28 @@ struct HeaderView: View {
                         Text("\(user.getBalance()) lei")
                     }
                     .padding(.horizontal)
-                    .font(.title3)
+                    .font(extend ? .title3 : .title2)
+                    .onLongPressGesture {
+                        withAnimation(){
+                            extend.toggle()
+                        }
+                    }
                     Spacer()
 
-                }.padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 20.0)
-                            .foregroundStyle(.green)
-                    )
+                }
 
+                if !extend{
+                    Text("Your goals will be displayed here.")
+                        .padding(.horizontal)
+                        .font(.title3)
+                    Spacer()
+                }
             }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 20.0)
+                    .foregroundStyle(.green)
+            )
         }
     }
 }

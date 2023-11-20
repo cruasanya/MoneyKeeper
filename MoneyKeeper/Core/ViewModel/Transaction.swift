@@ -12,7 +12,7 @@ class Transaction:Identifiable, Codable, Equatable{
     var id:UUID = UUID()
     private var destination:String
     private var source:String
-    private var date:Date
+    var date:Date
     private var sum: Double
 
     init(destination: String, source: String, date: Date, sum: Double) {

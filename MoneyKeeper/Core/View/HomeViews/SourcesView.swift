@@ -55,7 +55,7 @@ struct SourcesView: View {
                         Label("Delete", systemImage: "trash")
                     }
                 }
-                .swipeActions{
+                .swipeActions( allowsFullSwipe: false){
                     Button(role: .destructive) {
                         withAnimation {
                             delete(source)
@@ -64,6 +64,18 @@ struct SourcesView: View {
                         Label("Delete", systemImage: "trash")
                     }
                 }
+                .swipeActions(edge: .leading, allowsFullSwipe: true, content: {
+                    Button(){
+                        self.editingSource = source
+                        showingSourceEditing.toggle()
+                    }label: {
+                        HStack{
+                            Text("Edit your sources")
+                            Image(systemName: "pencil.circle")
+                        }
+                    }
+                    .tint(.green)
+                })
                 .sheet(isPresented: $showingSourceEditing, content: {
                     EditView(editingSource: $editingSource,
                              toggle: {

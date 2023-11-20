@@ -12,7 +12,7 @@ struct AddingSourceCategoryView: View {
     var name:String
     @State var nameText:String = ""
     @State var balance:String = ""
-    @State var selectedIcon:String = ""
+    @State var selectedIcon:String = "questionmark"
     @State var add: ()->Void
 
 

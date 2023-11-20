@@ -12,10 +12,14 @@ struct StatisticView: View {
     var history:History
     let chartStyle =    ChartStyle(backgroundColor: .black, accentColor: .cyan, secondGradientColor: .green, textColor: .white, legendTextColor: .white, dropShadowColor: .black)
     var body: some View {
-        BarChartView(data: history.getTransactionData(), title: "Transaction", form: ChartForm.extraLarge)
-            .changeColorScheme(style: chartStyle)
-        LineChartView(data: history.getTransactionSum(), title: "Transaction", style: chartStyle, rateValue: nil)
-
+        ScrollView{
+            Section("Today"){
+                PieChartView(data: history.getTransactionSum(), title: "Your transactions for now")
+            }
+            BarChartView(data: history.getTransactionData(), title: "Transaction", form: ChartForm.extraLarge)
+                .changeColorScheme(style: chartStyle)
+            LineChartView(data: history.getTransactionSum(), title: "Transaction", style: chartStyle, rateValue: nil)
+        }
 
     }
     
